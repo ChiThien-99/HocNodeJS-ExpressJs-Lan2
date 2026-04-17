@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fafafa;
+}
+
+header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+header h1 {
+  margin: 10px;
+}
+header h1 a {
+  text-decoration: none;
+  color: #027e1f;
+  display: inline-block;
+  padding: 3px;
+  border: 6px double #027e1f;
+  font-size: 50px;
+}
+header button {
+  padding: 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #027e1f;
+  color: #fafafa;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+main #products {
+  width: 70%;
+  margin: auto;
+}
+main #products #itemProduct {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  background-color: rgba(2, 126, 31, 0.6784313725);
+  color: #fafafa;
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+main #products #itemProduct img {
+  width: 100px;
+  height: 100px;
+}
+main #products #itemProduct div:last-child {
+  width: 30%;
+  text-align: start;
+  font-size: 20px;
+}
+main #detailProduct {
+  width: 70%;
+  margin: auto;
+}
+main #detailProduct img {
+  width: 50%;
+  height: auto;
+}
+main #detailProduct #btnUpdate {
+  background-color: #027e1f;
+  color: #fafafa;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+main #detailProduct #btnDelete {
+  background-color: red;
+  color: #fafafa;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}/*# sourceMappingURL=style.css.map */

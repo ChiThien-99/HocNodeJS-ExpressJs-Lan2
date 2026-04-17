@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Trang chi tiết sản phẩm</title>
+</head>
+<body>
+     <header>
+        <div>
+            <h1><a href="/">IMZ.AI</a></h1>
+        </div>
+        <div>
+            <button onclick="window.location.href='/products'">Home</button>
+            <button>Create</button>
+        </div>
+    </header>
+    <main>
+        <div id="detailProduct">
+            <h2><%=product.name%></h2>
+            <p><%=product.price%></p>
+            <p><%=product.category.name%></p>
+            <img src="<%=product.image%>" alt="<%=product.name%>"><br>
+            <button id="btnUpdate">Cập nhật</button>
+            <button id="btnDelete">Xóa</button>
+        </div>
+    </main>
+</body>
+</html>
