@@ -1,7 +1,10 @@
-const express=require("express");
-const router=express.Router();
-const prefix="/products";
-const productsController=require("./products.controller");
-router.get(prefix,productsController.getAllProducts);
-router.get(`${prefix}/detail/:id`,productsController.getDetailProductById)
-module.exports=router;
+const express = require("express");
+const router = express.Router();
+const prefix = "/products";
+const productsController = require("./products.controller");
+router.get(prefix, productsController.getAllProducts);
+router.get(`${prefix}/detail/:id`, productsController.getDetailProductById);
+router.get(`${prefix}/create`, productsController.getCreateProduct);
+router.get(`/api${prefix}/detail/:id`, productsController.getProductByApi);
+router.post(`${prefix}/create`, productsController.postCreateProduct);
+module.exports = router;

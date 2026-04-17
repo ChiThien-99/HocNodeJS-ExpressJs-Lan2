@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1><a href="/">IMZ.AI</a></h1>
+      </div>
+      <div>
+        <button onclick="window.location.href = '/products'">Home</button>
+        <button onclick="window.location.href = '/products/create'">
+          Create
+        </button>
+      </div>
+    </header>
+    <main>
+      <div id="formProduct">
+        <input
+          type="text"
+          id="inpNameProduct"
+          placeholder="Điền tên tour"
+        /><br />
+        <input
+          type="text"
+          id="inpPriceProduct"
+          placeholder="Điền giá tour"
+        /><br />
+        <input
+          type="text"
+          id="inpImgProduct"
+          placeholder="Điền hình ảnh"
+        /><br />
+        <input
+          type="text"
+          id="inpCategoryProduct"
+          placeholder="Điền danh mục"
+        /><br />
+        <button id="btnProduct">Tạo sản phẩm</button>
+      </div>
+    </main>
+  </body>
+  <script>
+    const inpNameProduct = document.getElementById("inpNameProduct");
+    const inpPriceProduct = document.getElementById("inpPriceProduct");
+    const inpImgProduct = document.getElementById("inpImgProduct");
+    const inpCategoryProduct = document.getElementById("inpCategoryProduct");
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    const { id } = params;
+    const fetchProductByApi = () => {
+      console.log(id);
+      fetch(`http://localhost:3000/api/products/detail/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json;charset=UTF-8",
+        },
+      })
+        .then((res) => res.json)
+        .then((res) => {
+          let { data } = res;
+          if (data) {
+            inpNameProduct.value = data.name || "";
+            inpPriceProduct.value = data.price || "";
+            inpImgProduct.value = data.image || "";
+            if (data.category && data.category._id) {
+              inpCategoryProduct.value = data.category._id;
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    fetchProductByApi();
+    document.getElementById("btnProduct").addEventListener("click", () => {
+      const body = JSON.stringify({
+        name: inpNameProduct.value,
+        price: inpPriceProduct.value,
+        image: inpImgProduct.value,
+        category: inpCategoryProduct.value,
+      });
+      console.log(body);
+      fetch("http://localhost:3000/products/create", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json;charset=UTF-8",
+        },
+        body,
+      })
+        .then((res) => res.json())
+        .then(({ code }) => {
+          if (code == 200) {
+            window.location.href = "/products";
+          }
+        });
+    });
+  </script>
+</html>
