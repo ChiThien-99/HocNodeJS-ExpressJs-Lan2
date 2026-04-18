@@ -18,7 +18,6 @@ exports.getProductByApi = async (req, res) => {
   try {
     let { id } = req.params;
     let product = await productEntity.findById(id).populate("category");
-    console.log(product);
     res.json(new ResponseType(product).success());
   } catch (error) {
     console.log(error);
@@ -36,3 +35,31 @@ exports.postCreateProduct = (req, res) => {
     res.json(new ResponseType(null).error());
   }
 };
+exports.putUpdateProduct=async (req,res)=>{
+  try {
+  let {id}=req.params;
+  let {name,price,image,category}=req.body;
+  let updateProduct=await productEntity.findByIdAndUpdate(id,{
+    name,
+    price,
+    image,
+    category,
+  })
+  res.json(new ResponseType(updateProduct).success())
+  } catch (error) {
+    console.log(error);
+    res.json(new ResponseType(null).error());
+  }
+  
+}
+exports.deleteProduct=async (req,res)=>{
+  try {
+    let {id}=req.params;
+    let deleteProduct=await productEntity.findByIdAndDelete(id).populate("category");
+    res.json(new ResponseType(deleteProduct).success());
+  } catch (error) {
+    console.log(error);
+    res.json(new ResponseType(null).error());
+  }
+  
+}

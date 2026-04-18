@@ -53,6 +53,12 @@
       get: (searchParams, prop) => searchParams.get(prop),
     });
     const { id } = params;
+    const btnProduct=document.getElementById("btnProduct");
+    if(id){
+      btnProduct.innerHTML="Cập nhật";
+    }else{
+      btnProduct.innerHTML="Tạo sản phẩm";
+    }
     const fetchProductByApi = () => {
       console.log(id);
       fetch(`http://localhost:3000/api/products/detail/${id}`, {
@@ -61,7 +67,7 @@
           "Content-type": "application/json;charset=UTF-8",
         },
       })
-        .then((res) => res.json)
+        .then((res) => res.json())
         .then((res) => {
           let { data } = res;
           if (data) {
@@ -85,8 +91,23 @@
         image: inpImgProduct.value,
         category: inpCategoryProduct.value,
       });
-      console.log(body);
-      fetch("http://localhost:3000/products/create", {
+      if(id){
+       fetch(`http://localhost:3000/products/update/${id}`,{
+        method:"PUT",
+        headers:{
+          "Content-type":"application/json;charset=UTF-8"
+        },
+        body,
+       })
+       .then((res)=>res.json())
+       .then((res)=>{
+        let {code}=res;
+        if(code==200){
+          window.location.href="/products";
+        }
+       })
+      }else{
+        fetch("http://localhost:3000/products/create", {
         method: "POST",
         headers: {
           "Content-type": "application/json;charset=UTF-8",
@@ -99,6 +120,8 @@
             window.location.href = "/products";
           }
         });
+      }
+     
     });
   </script>
 </html>

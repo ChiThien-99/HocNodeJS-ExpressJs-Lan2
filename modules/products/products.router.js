@@ -7,4 +7,6 @@ router.get(`${prefix}/detail/:id`, productsController.getDetailProductById);
 router.get(`${prefix}/create`, productsController.getCreateProduct);
 router.get(`/api${prefix}/detail/:id`, productsController.getProductByApi);
 router.post(`${prefix}/create`, productsController.postCreateProduct);
+router.put(`${prefix}/update/:id`,productsController.putUpdateProduct);
+router.delete(`${prefix}/delete/:id`,productsController.deleteProduct);
 module.exports = router;

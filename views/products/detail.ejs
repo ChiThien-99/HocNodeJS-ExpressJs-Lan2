@@ -20,6 +20,7 @@
     </header>
     <main>
       <div id="detailProduct">
+        <p id="idProduct" style="display: none;"><%=product.id%></p>
         <h2><%=product.name%></h2>
         <p><%=product.price%></p>
         <p><%=product.category.name%></p>
@@ -34,4 +35,23 @@
       </div>
     </main>
   </body>
+  <script>
+    const id=document.getElementById("idProduct").innerHTML;
+    document.getElementById("btnDelete").addEventListener("click",()=>{
+      fetch(`http://localhost:3000/products/delete/${id}`,{
+      method:"DELETE",
+      headers:{
+        "Content-type":"application/json;charset=UTF-8"
+      }
+    })
+    .then((res)=>res.json())
+    .then((res)=>{
+      let {code}=res;
+      if(code==200){
+        window.location.href="/products";
+      }
+    })
+    })
+    
+  </script>
 </html>
